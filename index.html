@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lecteur App</title>
+ <!-- <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>-->
+ <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
+ <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ <script defer src="script.js"></script>
+
+<style>
+   * {
+  box-sizing: border-box;
+     }
+
+.col-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.col {
+  flex: 1;
+  padding: 16px;
+}
+.SelectedQuestion{
+  background-color: grey;
+  padding:16px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.SingleAnswers{
+  background-color: darkgrey;
+  padding:16px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.OuterMessage{
+  position: relative;
+  left:150px;
+  margin-top: 5px;
+}
+</style>
+
+  
+  </style>
+</head>
+<body>
+  <div class="col-container">
+    <div class="col" style="background:orange">
+       <div>
+            <p>Wählen Sie die Fragenkategorie für den Workshop aus und laden Sie die Fragen.</p>
+        </div>
+      <div class="w-1/2 mt-4">
+        <select id="selectCategorys" name="selectCategorys" size="1" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"> </select>
+
+        <button id="loadQuestions" onclick="loadParameters()" class="self-center mt-4 flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Fragen Laden
+        </button>
+    </div>
+
+
+    </div>
+  
+    <div class="col" style="background:yellow">
+        <button id="btnShowQuestion" class="">
+          Erste Fragenrunde
+        </button>
+        <button id="btnShowQuestion2" class="">
+          Zweite Fragenrunde
+        </button>
+
+        <button id="btnScore" class="">
+          Ergenmisse Veröffentlichen
+        </button>
+        
+        <div class="SelectedQuestion">
+            <h1 id="SelectedQuestionAnswer">Momentan ausgewählte Frage</h1>
+            <p id="SelectedQuestionPos0"> Beispeilfrage</p>
+            <p id="SelectedQuestionPos1"> Beispielantwort</p>
+            <p id="SelectedQuestionPos2"> Beispielantwort</p>
+            <p id="SelectedQuestionPos3"> Beispielantwort</p>
+            <p id="SelectedQuestionPos4"> Beispielantwort</p>
+
+        </div>
+        
+      
+
+        <div class="ChartContainer">  
+          <canvas id="myChart">Durchschnitts-Performance</canvas>  
+        </div>
+        
+        <div id="SingleAnswersContainer">
+
+        </div>
+
+    </div>
+
+   
+  
+    <div class="col" style="background:orange">
+      <div id="message-container"></div>
+       <form id="send-container">
+          <input type="text" id="message-input">
+          <button type="submit" id="send-button">Send</button>
+       </form>
+    </div>
+  </div>
+  
+  
+
+ 
+
+  
+ 
+
+</body>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script defer src="performance.js"></script>
+  <script defer src ="loadQuestions.js"></script>
+ 
+
+
+</html>
