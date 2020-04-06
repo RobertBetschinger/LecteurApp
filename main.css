@@ -86,7 +86,7 @@ details{
 
 summary{
     height: 2rem;
-    line-height: 2rem;
+    line-height: 1rem;
 }
 details:hover{
     background-color: #3e8e41;

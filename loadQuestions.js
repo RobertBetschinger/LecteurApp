@@ -56,7 +56,7 @@ const questionsbutton = document.getElementById("loadQuestions");
 let fragenArray
 let fragenData
 
-function loadParameters() {
+function loadParameter1s() {
     sValue = $("option:selected", select).text()
     var selectBox = document.getElementById("selectCategorys");
     var op = selectBox.options[selectBox.selectedIndex];
@@ -75,6 +75,22 @@ function loadParameters() {
             reject(data)
         )
         addQuestionsToPage(fragenData);
+}
+
+async function loadParameters(){
+    sValue = $("option:selected", select).text()
+    var selectBox = document.getElementById("selectCategorys");
+    var op = selectBox.options[selectBox.selectedIndex];
+    var optgroup = op.parentNode;
+    var cValue = optgroup.label
+
+    try{
+        let fragenArray = await loadQuestions(cValue, sValue);
+        addQuestionsToPage(fragenArray);
+    } catch(error){
+        console.log(error)
+    }
+
 }
 
 function loadQuestions(cValue, sValue) {
@@ -114,27 +130,45 @@ function loadQuestions(cValue, sValue) {
 
 
 
-function addQuestionsToPage(fragenData){
-  
-    console.log(fragenData)
+function addQuestionsToPage(fragenArray){
+
     fragenArray.forEach(element => {
-        console.log(element)
+     if(element.triggerQuestion == true){
+        var $newDiv = $("<div/>")   // creates a div element                
+            .addClass("addedQuestion")   // add a class
+            .html('<details>' +
+                    '<summary>'+ 'Frage: ' +element.question + '</summary>'+
+                    '<br> <ul>' +
+                    ' <br><li>' +  element.answers[0].aText+'</li>' +
+                    ' <li>' +  element.answers[1].aText+'</li>' +
+                    ' <li>' +  element.answers[2].aText + '</li>' +
+                    ' <li>' +  element.answers[3].aText + '</li>' +
+                    '<br>' +
+                    '  </ul>' +
+                    ' <h3>Trigger Typ: ' + element.triggerType + '</h3>' +
+                    ' <button class="buttonActivate">Button</button>'+
+                    '</details>');  
+                   $("#DetailsContainer").append($newDiv);
+     } else{
         var $newDiv = $("<div/>")   // creates a div element                
         .addClass("addedQuestion")   // add a class
         .html('<details>' +
-                '<summary>'+'adsasd' + '</summary>'+
-                '<ul style="list-style-type:circle;">' +
-                ' <li><h3>Das ist eine Beispielfrage.</h3></li>' +
-                ' <li>Tea</li>' +
-                ' <li>Milk</li>' +
-                '<li>Tea</li>' +
-                '<li>Milk</li>' +
+                '<summary>'+ 'Frage: ' +element.question + '</summary>'+
+                '<br> <ul>' +
+                ' <br><li>' +  element.answers[0].aText+'</li>' +
+                ' <li>' +  element.answers[1].aText+'</li>' +
+                ' <li>' +  element.answers[2].aText + '</li>' +
+                ' <li>' +  element.answers[3].aText + '</li>' +
+                '<br>' +
                 '  </ul>' +
                 ' <button class="buttonActivate">Button</button>'+
                 '</details>');
 
-                $("#DetailsContainer").append($newDiv);
-        });
+               $("#DetailsContainer").append($newDiv);
+     }
+   
+        
 
-  
-}
+    
+})};
+
