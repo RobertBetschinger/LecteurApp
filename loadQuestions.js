@@ -126,13 +126,35 @@ function loadQuestions(cValue, sValue) {
     })
 }
 
-
-
-
+/*
+function addQuestionsToPage(fragenArray){
+    
+    fragenArray.forEach(element => {
+    var $newDiv = $("<button/>")   // creates a div element                
+            .addClass("buttonQuestion")   // add a class
+            .innerhtml('<h2>' +element.question + '</h2>'+
+                    '<br> <ul>' +
+                    ' <br><li>' +  element.answers[0].aText+'</li>' +
+                    ' <li>' +  element.answers[1].aText+'</li>' +
+                    ' <li>' +  element.answers[2].aText + '</li>' +
+                    ' <li>' +  element.answers[3].aText + '</li>' +
+                    '<br>' +
+                    '  </ul>' +
+                    ' <h3>Trigger Typ: ' + element.triggerType + '</h3>');
+                    $("#DetailsContainer").append($newDiv);  
+    });
+};
+*/
 
 function addQuestionsToPage(fragenArray){
-
+    var index = 0;
     fragenArray.forEach(element => {
+        index++;
+
+        var $newButton=$("<button/>")
+        .addClass("buttonActivate")
+        .attr("id","Test")
+
      if(element.triggerQuestion == true){
         var $newDiv = $("<div/>")   // creates a div element                
             .addClass("addedQuestion")   // add a class
@@ -146,7 +168,7 @@ function addQuestionsToPage(fragenArray){
                     '<br>' +
                     '  </ul>' +
                     ' <h3>Trigger Typ: ' + element.triggerType + '</h3>' +
-                    ' <button class="buttonActivate">Button</button>'+
+                    ' <button class="buttonActivate">Activate</button>'+
                     '</details>');  
                    $("#DetailsContainer").append($newDiv);
      } else{
@@ -161,14 +183,15 @@ function addQuestionsToPage(fragenArray){
                 ' <li>' +  element.answers[3].aText + '</li>' +
                 '<br>' +
                 '  </ul>' +
-                ' <button class="buttonActivate">Button</button>'+
-                '</details>');
-
-               $("#DetailsContainer").append($newDiv);
+               $newButton +
+                '</details>')
+               $("#DetailsContainer").append($newDiv);              
      }
-   
-        
-
-    
 })};
 
+
+
+
+$(document).on("click", "button.buttonActivate" , function() {
+    window.alert("akdkaska")
+});
