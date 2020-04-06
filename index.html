@@ -10,62 +10,65 @@
  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
  <script defer src="script.js"></script>
 
-<style>
-   * {
-  box-sizing: border-box;
-     }
+<link rel="stylesheet" href="main.css">
 
-.col-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.col {
-  flex: 1;
-  padding: 16px;
-}
-.SelectedQuestion{
-  background-color: grey;
-  padding:16px;
-  height: auto;
-  margin-top: 20px;
-}
-
-.SingleAnswers{
-  background-color: darkgrey;
-  padding:16px;
-  height: auto;
-  margin-top: 20px;
-}
-
-.OuterMessage{
-  position: relative;
-  left:150px;
-  margin-top: 5px;
-}
-</style>
-
-  
+    
   </style>
 </head>
 <body>
-  <div class="col-container">
-    <div class="col" style="background:orange">
-       <div>
-            <p>Wählen Sie die Fragenkategorie für den Workshop aus und laden Sie die Fragen.</p>
+  <div class="flex-container">
+    <div class="col col1" >
+          <div>
+                <h1>Fragen/Vortragsphase</h1>
+                <p>Wählen Sie die Fragenkategorie für den Workshop aus und laden Sie die Fragen.</p>
+            </div>
+          <div class="custom-select">
+
+            <select id="selectCategorys" name="selectCategorys" size="1" class="select-css"> </select>
+
+            <button id="loadQuestions" onclick="loadParameters()" class="button button1">
+                Fragen Laden
+            </button>
         </div>
-      <div class="w-1/2 mt-4">
-        <select id="selectCategorys" name="selectCategorys" size="1" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"> </select>
 
-        <button id="loadQuestions" onclick="loadParameters()" class="self-center mt-4 flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Fragen Laden
-        </button>
-    </div>
+        <!--
+        <div class="QuestionsContainer">
+        <div class="btn-group">
+          <button onclick="myFunction()" class="buttonQuestion">Button</button>
+          <button class="buttonQuestion">Button</button>
+          <button class="buttonQuestion">Button</button>
+          <button class="buttonQuestion">Button</button>
+        </div>
+        </div>
+      -->
+        <div id="DetailsContainer" class="DetailsContainer">
+        <details >
+          <summary>Frage 1:</summary>
+          <ul style="list-style-type:circle;">
+            <li><h1>Das ist eine Beispielfrage.</h1></li>
+            <li>Tea</li>
+            <li>Milk</li>
+            <li>Tea</li>
+            <li>Milk</li>
+          </ul>
+          <button onclick="window.alert('Test')" class="buttonActivate">Button</button>
 
+        </details>
 
+        
+
+        <details >
+          <summary>Frage 1:</summary>
+          <p> - by Refsnes Data. All Rights Reserved.</p>
+          <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+        </details>
+      </div>
     </div>
   
-    <div class="col" style="background:yellow">
+
+
+    
+    <div class="col col2 ">
         <button id="btnShowQuestion" class="">
           Erste Fragenrunde
         </button>
@@ -101,7 +104,7 @@
 
    
   
-    <div class="col" style="background:orange">
+    <div class="col col3">
       <div id="message-container"></div>
        <form id="send-container">
           <input type="text" id="message-input">
@@ -110,19 +113,10 @@
     </div>
   </div>
   
-  
-
- 
-
-  
- 
-
 </body>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script defer src="performance.js"></script>
   <script defer src ="loadQuestions.js"></script>
- 
-
-
+  
 </html>

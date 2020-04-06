@@ -69,11 +69,12 @@ function loadParameters() {
             var string = JSON.stringify(data);
             var json = JSON.parse(string)
             fragenArray = json
-            console.log(fragenArray);
+            //console.log(fragenArray);
+            
         }).catch((data) =>
             reject(data)
         )
-       
+        addQuestionsToPage(fragenData);
 }
 
 function loadQuestions(cValue, sValue) {
@@ -107,4 +108,33 @@ function loadQuestions(cValue, sValue) {
             }
         })
     })
+}
+
+
+
+
+
+function addQuestionsToPage(fragenData){
+  
+    console.log(fragenData)
+    fragenArray.forEach(element => {
+        console.log(element)
+        var $newDiv = $("<div/>")   // creates a div element                
+        .addClass("addedQuestion")   // add a class
+        .html('<details>' +
+                '<summary>'+'adsasd' + '</summary>'+
+                '<ul style="list-style-type:circle;">' +
+                ' <li><h3>Das ist eine Beispielfrage.</h3></li>' +
+                ' <li>Tea</li>' +
+                ' <li>Milk</li>' +
+                '<li>Tea</li>' +
+                '<li>Milk</li>' +
+                '  </ul>' +
+                ' <button class="buttonActivate">Button</button>'+
+                '</details>');
+
+                $("#DetailsContainer").append($newDiv);
+        });
+
+  
 }
