@@ -71,8 +71,7 @@ async function loadParameters(){
         //Show Questions Containers, load Question into box
         document.getElementById("DetailsContainer").style.visibility = "visible";
         document.getElementById("SelectedQuestion").style.visibility = "visible";
-        console.log("appending empty container")
-        appendEmptyContainer();
+        appendEmptyContainer(fragenArray);
     } catch(error){
         console.log(error)
     }
@@ -121,33 +120,47 @@ function hideElements(){
 }
 
 
-var title = "Constructing HTML Elements";
 
-var html = [
-    '<div class="empty">',
-    '<div id="comment1" class="fill" draggable="true">',
-    '<div class="details">',
-    '<h3>Beispielfrage</h3>',
-    '<ul>', 
-    '<li>   Pepsi</li>',
-    '<li>   Cola</li>',
-    '<li>   Gleichgut  </li>', 
-    '<li>   Fantaaaaa  </li>', 
-    '<br>', 
-    '</ul>', 
-    '<h3>Beispieltrigger </h3>', 
-    '</div>',
-    '</div>',
-    '</div>'   
-].join("\n");
-// html: '<div ...>\n<h1 ...>Constructing HTML Elements<h1>\n</div>'
 
-//$("DetailsContainer").append(html);
 
-function appendEmptyContainer(){
-    console.log("Rly Appending, inside Function")
-    $("#DetailsContainer").append(html);
-    //$("#DetailsContainer").append($newDiv);  
+function appendEmptyContainer(fragenArray){
+
+    fragenArray.forEach(element => {
+
+        var html = [
+            '<div class="empty">',
+            '<div id="comment1" class="fill" draggable="true">',
+            '<div class="details">',
+            '<h3>' + element.question + '</h3>',
+            '<ul>', 
+            '<li>   ' + element.answers[0].aText+ + '</li>',
+            '<li>   ' + element.answers[1].aText+ + '</li>',
+            '<li>   ' + element.answers[2].aText+ + '  </li>', 
+            '<li>   ' + element.answers[3].aText+ + '  </li>', 
+            '<br>', 
+            '</ul>', 
+            '<h3>Triggertyp: ' + element.triggerType + ' </h3>', 
+            '</div>',
+            '</div>',
+            '</div>'   
+        ].join("\n");
+        $("#DetailsContainer").append(html);
+    });
+
+    fills = document.querySelectorAll('.fill');
+    empties = document.querySelectorAll('.empty');
+    
+    for(const fill of fills){
+    fill.addEventListener('dragstart', dragStart);
+    fill.addEventListener('dragend', dragEnd);
+    };
+
+    for (const empty of empties) {
+        empty.addEventListener('dragover', dragOver);
+        empty.addEventListener('dragenter', dragEnter);
+        empty.addEventListener('dragleave', dragLeave);
+        empty.addEventListener('drop', dragDrop);
+      }
 }
 
 
@@ -156,24 +169,15 @@ function appendEmptyContainer(){
 
 
 
-const fill = document.querySelector('.fill');
-const empties = document.querySelectorAll('.empty');
+let fill = document.querySelector('.fill');
+let empties = document.querySelectorAll('.empty');
 
-// Fill listeners
-fill.addEventListener('dragstart', dragStart);
-fill.addEventListener('dragend', dragEnd);
-
-// Loop through empty boxes and add listeners
-for (const empty of empties) {
-  empty.addEventListener('dragover', dragOver);
-  empty.addEventListener('dragenter', dragEnter);
-  empty.addEventListener('dragleave', dragLeave);
-  empty.addEventListener('drop', dragDrop);
-}
 
 // Drag Functions
 
 function dragStart() {
+
+  console.log(this)
   this.className += ' hold';
   setTimeout(() => (this.className = 'invisible'), 0);
 }
@@ -210,7 +214,7 @@ function dragDrop() {
   if(this.id == "right"){
     this.className = ' empty rightempty';
     SelectedQuestionAnswer.innerHTML ="Momentan ausgewählte Frage"
-    this.append(fill);
+    this.append(fills[1]);
 }
 else{
     this.className = ' empty'
