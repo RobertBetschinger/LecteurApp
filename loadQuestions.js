@@ -71,6 +71,8 @@ async function loadParameters(){
         //Show Questions Containers, load Question into box
         document.getElementById("DetailsContainer").style.visibility = "visible";
         document.getElementById("SelectedQuestion").style.visibility = "visible";
+        console.log("appending empty container")
+        appendEmptyContainer();
     } catch(error){
         console.log(error)
     }
@@ -113,10 +115,44 @@ function loadQuestions(cValue, sValue) {
 
 function hideElements(){
     //To Huide Details Container, Graph, Selected Question
-    document.getElementById("DetailsContainer").style.visibility = "hidden";
+      document.getElementById("DetailsContainer").style.visibility = "hidden";
       document.getElementById("SelectedQuestion").style.visibility = "hidden";
       document.getElementById("ChartContainer").style.visibility = "hidden";
 }
+
+
+var title = "Constructing HTML Elements";
+
+var html = [
+    '<div class="empty">',
+    '<div id="comment1" class="fill" draggable="true">',
+    '<div class="details">',
+    '<h3>Beispielfrage</h3>',
+    '<ul>', 
+    '<li>   Pepsi</li>',
+    '<li>   Cola</li>',
+    '<li>   Gleichgut  </li>', 
+    '<li>   Fantaaaaa  </li>', 
+    '<br>', 
+    '</ul>', 
+    '<h3>Beispieltrigger </h3>', 
+    '</div>',
+    '</div>',
+    '</div>'   
+].join("\n");
+// html: '<div ...>\n<h1 ...>Constructing HTML Elements<h1>\n</div>'
+
+//$("DetailsContainer").append(html);
+
+function appendEmptyContainer(){
+    console.log("Rly Appending, inside Function")
+    $("#DetailsContainer").append(html);
+    //$("#DetailsContainer").append($newDiv);  
+}
+
+
+
+
 
 
 
