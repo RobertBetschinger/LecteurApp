@@ -31,23 +31,65 @@
             </button>
         </div>
 
+
+
+    <div id="DetailsContainer" style="visibility: hidden;" class="DetailsContainer">
+        <h3 style="margin-bottom: 1rem;">Wählen Sie die gewünschte Frage aus.</h3>
+           <div class="empty">
+                <div id="comment1" class="fill" draggable="true"> 
         
-        <div class="QuestionsContainer">
-        <div id="btn-group" class="btn-group">
-          
-      
-        </div>
-        </div>
+                        <div class="details"> 
+                        <h3> ISt Cola oder Pesi besser  </h3>
+                        <ul> 
+                        <li>   Pepsi</li> 
+                        <li>   Cola</li> 
+                        <li>   Gleichgut  </li> 
+                        <li>   Fanta  </li> 
+                        <br> 
+                          </ul> 
+                        <h3>Beispieltrigger </h3> 
+                        </div>  
+                </div>
+            </div>
+            <div class="buttonRow">
+            <button id="" onclick="" class="buttonMoveLeft button1">
+              Vorherige Frage
+          </button>
+          <button id="" onclick="" class="buttonMoveRight button1">
+             Nächste Frage
+        </button>
+      </div>
+
+    </div>
+
     
-        <div id="DetailsContainer" class="DetailsContainer">
-      
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
   
 
 
 
+
+
+
+
+
     <div class="col col2 ">
+      <h1>Peer Instructions</h1>
         <button id="btnShowQuestion" class="">
           Erste Fragenrunde
         </button>
@@ -59,20 +101,16 @@
           Ergenmisse Veröffentlichen
         </button>
         
-        <div class="SelectedQuestion">
+        <div id="SelectedQuestion" style="visibility: hidden;" class="SelectedQuestion">
             <h1 id="SelectedQuestionAnswer">Momentan ausgewählte Frage</h1>
-            <p id="SelectedQuestionPos0"> Beispeilfrage</p>
-            <p id="SelectedQuestionPos1"> Beispielantwort</p>
-            <p id="SelectedQuestionPos2"> Beispielantwort</p>
-            <p id="SelectedQuestionPos3"> Beispielantwort</p>
-            <p id="SelectedQuestionPos4"> Beispielantwort</p>
-
+            <div id="right" class="empty rightempty">             
+            </div>
         </div>
         
       
 
-        <div class="ChartContainer">  
-          <canvas id="myChart">Durchschnitts-Performance</canvas>  
+        <div id="ChartContainer" class="ChartContainer">  
+          <canvas style="visibility: hidden;" id="myChart">Durchschnitts-Performance</canvas>  
         </div>
         
         <div id="SingleAnswersContainer">

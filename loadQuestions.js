@@ -1,4 +1,5 @@
 $(document).ready(function() {
+   // hideElements();
     loadData();
 });
 
@@ -56,26 +57,7 @@ const questionsbutton = document.getElementById("loadQuestions");
 let fragenArray
 let fragenData
 
-function loadParameter1s() {
-    sValue = $("option:selected", select).text()
-    var selectBox = document.getElementById("selectCategorys");
-    var op = selectBox.options[selectBox.selectedIndex];
-    var optgroup = op.parentNode;
-    var cValue = optgroup.label
-    console.log(sValue)
 
-    fragenData = loadQuestions(cValue, sValue).then(data => {
-            console.log("JSON Sollte kommen");
-            var string = JSON.stringify(data);
-            var json = JSON.parse(string)
-            fragenArray = json
-            //console.log(fragenArray);
-            
-        }).catch((data) =>
-            reject(data)
-        )
-        addQuestionsToPage(fragenData);
-}
 
 async function loadParameters(){
     sValue = $("option:selected", select).text()
@@ -86,12 +68,15 @@ async function loadParameters(){
 
     try{
         let fragenArray = await loadQuestions(cValue, sValue);
-        addQuestionsToPage(fragenArray);
+        //Show Questions Containers, load Question into box
+        document.getElementById("DetailsContainer").style.visibility = "visible";
+        document.getElementById("SelectedQuestion").style.visibility = "visible";
     } catch(error){
         console.log(error)
     }
-
 }
+
+
 
 function loadQuestions(cValue, sValue) {
     console.log("loadQestion")
@@ -126,6 +111,103 @@ function loadQuestions(cValue, sValue) {
     })
 }
 
+function hideElements(){
+    //To Huide Details Container, Graph, Selected Question
+    document.getElementById("DetailsContainer").style.visibility = "hidden";
+      document.getElementById("SelectedQuestion").style.visibility = "hidden";
+      document.getElementById("ChartContainer").style.visibility = "hidden";
+}
+
+
+
+const fill = document.querySelector('.fill');
+const empties = document.querySelectorAll('.empty');
+
+// Fill listeners
+fill.addEventListener('dragstart', dragStart);
+fill.addEventListener('dragend', dragEnd);
+
+// Loop through empty boxes and add listeners
+for (const empty of empties) {
+  empty.addEventListener('dragover', dragOver);
+  empty.addEventListener('dragenter', dragEnter);
+  empty.addEventListener('dragleave', dragLeave);
+  empty.addEventListener('drop', dragDrop);
+}
+
+// Drag Functions
+
+function dragStart() {
+  this.className += ' hold';
+  setTimeout(() => (this.className = 'invisible'), 0);
+}
+
+function dragEnd() {
+  this.className = 'fill';
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dragEnter(e) {
+  e.preventDefault();
+  this.className += ' hovered';
+}
+
+const SelectedQuestionAnswer =document.getElementById("SelectedQuestionAnswer")
+function dragLeave() {
+    if(this.id == "right"){
+        this.className = ' empty rightempty';
+        SelectedQuestionAnswer.innerHTML ="Ziehen Sie hier die ausgewählte Frage hinein."
+        
+    }
+    else{
+        this.className = ' empty'
+    }
+  
+ 
+}
+
+function dragDrop() {
+
+  if(this.id == "right"){
+    this.className = ' empty rightempty';
+    SelectedQuestionAnswer.innerHTML ="Momentan ausgewählte Frage"
+    this.append(fill);
+}
+else{
+    this.className = ' empty'
+    this.append(fill);
+}
+}
+
+function doesRightPArtContain(){
+    try{
+        const hasChildDiv = document.getElementById("right").querySelector("#comment1").querySelector("details").querySelector("summary")
+        if (hasChildDiv !== null) {
+            alert(hasChildDiv.innerHTML)}
+    }catch{
+        alert("nichts drin")
+      } 
+}
+
+
+function changeText(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 function addQuestionsToPage(fragenArray){
     
@@ -146,6 +228,23 @@ function addQuestionsToPage(fragenArray){
 };
 */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function addQuestionsToPage(fragenArray){
     var index = 0;
     fragenArray.forEach(element => {
@@ -154,6 +253,7 @@ function addQuestionsToPage(fragenArray){
         var $newButton=$("<button/>")
         .addClass("buttonActivate")
         .attr("id","Test")
+        .attr("value")
 
      if(element.triggerQuestion == true){
         var $newDiv = $("<div/>")   // creates a div element                
@@ -168,7 +268,6 @@ function addQuestionsToPage(fragenArray){
                     '<br>' +
                     '  </ul>' +
                     ' <h3>Trigger Typ: ' + element.triggerType + '</h3>' +
-                    ' <button class="buttonActivate">Activate</button>'+
                     '</details>');  
                    $("#DetailsContainer").append($newDiv);
      } else{
@@ -182,8 +281,7 @@ function addQuestionsToPage(fragenArray){
                 ' <li>' +  element.answers[2].aText + '</li>' +
                 ' <li>' +  element.answers[3].aText + '</li>' +
                 '<br>' +
-                '  </ul>' +
-               $newButton +
+                '  </ul>' +             
                 '</details>')
                $("#DetailsContainer").append($newDiv);              
      }
@@ -192,6 +290,4 @@ function addQuestionsToPage(fragenArray){
 
 
 
-$(document).on("click", "button.buttonActivate" , function() {
-    window.alert("akdkaska")
-});
+

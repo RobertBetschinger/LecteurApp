@@ -54,26 +54,19 @@ p{
     color: white;
 }
 
-.QuestionsContainer{
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-}
 
-.addedQuestion{
-    width: 100%;
-}
 
 .DetailsContainer{
     margin-top: 20px;
     align-items: center;
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    
+    height: 16rem;
   
 }
 
-details{
+.details{
     margin-top: 10px;
     color:white;
     padding: 15px 32px;
@@ -84,50 +77,87 @@ details{
     text-align: left;
 }
 
-summary{
-    height: 2rem;
-    line-height: 1rem;
-}
-details:hover{
+
+.details:hover{
     background-color: #3e8e41;
 }
 
-.buttonActivate{
+.empty{
+    width: 100%;
+    height:14rem;
+    padding:10px;
+    border:2px black solid
+}
+
+.rightempty{
     width: 50%;
+    height:14rem;
+    padding:10px;
+    border:2px black solid
+}
+
+.superempty{
+    width: 100%;
+    height:14rem;
+    padding:10px;
+    border:2px black solid
+}
+
+.SelectedQuestion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttonMoveRight{
+    width: 40%;
     color: black;
     font-size: 1rem;
     border: 3px #fff solid;
     padding: 15px 32px;
     margin-top: 20px;
-   
+    margin-bottom: 3rem;
     transition: all 0.5s ease-out; 
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    background-color: yellow;
+    background-color: dodgerblue;
     border: none;
+    text-align: center;
+  }
+
+  .buttonMoveLeft{
+    width: 40%;
+    color: black;
+    font-size: 1rem;
+    border: 3px #fff solid;
+    padding: 15px 32px;
+    margin-top: 20px;
+    margin-bottom: 3rem;
+    transition: all 0.5s ease-out; 
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: dodgerblue;
+    border: none;
+    text-align: center;
+  }
+
+  .buttonMoveRight:hover {
+    padding: 0.5rem 1.5rem;
+    background:rgb(0, 106, 211);
+    color:white; 
+    border-color: black;    
 }
 
-.btn-group .buttonQuestion {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
-    width: 150px;
-    display: block;
-   margin-top:20px;
-   margin-bottom: 20px;
-  }
-  
-  .btn-group .buttonQuestion:not(:last-child) {
-    border-bottom: none; /* Prevent double borders */
-  }
-  
-  .btn-group .buttonQuestion:hover {
-    background-color: #3e8e41;
-  }
+.buttonMoveLeft:hover {
+    padding: 0.5rem 1.5rem;
+    background:rgb(0, 106, 211);
+    color:white; 
+    border-color: black;    
+}
 
 
 .button {
@@ -144,8 +174,7 @@ details:hover{
       border: none;
     }
   
-
-  .button:hover{
+.button:hover{
     padding: 0.5rem 1.5rem;
     background:rgb(0, 106, 211);
     color:white; 
@@ -155,15 +184,14 @@ details:hover{
     border-radius: 12px;
 }
   
-
-
 .custom-select{
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
+
+
 
 .select-css {
 	display: block;

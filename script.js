@@ -64,11 +64,14 @@ messageForm.addEventListener('submit', e => {
 //Question Bereich
 const btnShowQuestion = document.getElementById("btnShowQuestion");
 btnShowQuestion.addEventListener('click', function(){
+    console.log("aifdnjkajks")
+    document.getElementById("myChart").style.visibility ="visible"
     const question = collectQuestion();
     socket.emit('NewQuestion',question)
     socket.emit('newPhase','Answering')
     clearChart();
     clearStudentAnswers();
+    
 })
 
 //Question Bereich
