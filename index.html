@@ -1,117 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Lecteur App</title>
- <!-- <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>-->
- <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
- <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lecteur App</title>
+    <!-- <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>-->
+    <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+    <script defer src="js/script.js"></script>
 
-<link rel="stylesheet" href="main.css">
-
-    
-  </style>
 </head>
-<body>
-  <div class="flex-container">
-    <div class="col col1" >
-          <div>
-                <h1>Fragen/Vortragsphase</h1>
-                <p>Wählen Sie die Fragenkategorie für den Workshop aus und laden Sie die Fragen.</p>
+
+<body id="bg-img">
+    <header>
+        <div class="menu-btn">
+          <div class="btn-line"></div>
+          <div class="btn-line"></div>
+          <div class="btn-line"></div>
+        </div>
+    
+        <nav class="menu">
+          <div class="menu-branding">
+            <div class="portrait"></div>
+          </div>
+          <ul class="menu-nav">
+            <li class="nav-item current">
+              <a href="index.html" class="nav-link current">
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">
+                About Me
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="work.html" class="nav-link">
+                My Work
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a href="Interests.html" class="nav-link">
+                My Interests
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">
+                How To Reach Me
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    
+    
+    
+    <div class="flex-container">
+        <div class="col col1">
+            <div>
+                <h1 class="lg-heading">Questions/<span class="text-secondary">Lecteuring</span></h1>
+                <h3>Choose a Question-Category for the Workshop and<span class="text-secondary"> load the Questions.</span></h3>
             </div>
-          <div class="custom-select">
+            <div class="custom-select">
 
-            <select id="selectCategorys" name="selectCategorys" size="1" class="select-css"> </select>
+                <select id="selectCategorys" name="selectCategorys" size="1" class="select-css"> </select>
 
-            <button id="loadQuestions" onclick="loadParameters()" class="button button1">
-                Fragen Laden
+                <button id="loadQuestions" onclick="loadParameters()" class="button button1">
+                    Load Questions
+                </button>
+            </div>
+
+            <div id="DetailsContainer" style="visibility: hidden;" class="DetailsContainer">
+                <h3 >Choose a Question via<span class="text-secondary"> Drag/Drop!</span></h3>
+                <div id="QuestionsLeftContainer" class="container containerLeft">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col col2 ">
+            <h1 class="lg-heading">Peer <span class="text-secondary"> Instructions</span></h1>
+            <button id="btnShowQuestion" class="buttonCol2 button1">
+                1. Question-Round
             </button>
-        </div>
+            <button id="btnShowQuestion2" class="buttonCol2 button1">
+                2. Question-Round
+            </button>
 
+            <button id="btnScore" class="buttonCol2 button1">
+                Show Results
+            </button>
 
+            <div id="SelectedQuestion" style="visibility: hidden;" class="SelectedQuestion">
+                <h1 id="SelectedQuestionAnswer">Currently<span class="text-secondary"> Selected</span>  Question</h1>
+                <div id="right" class="container containerRight">
+                  
+                </div>
 
-    <div id="DetailsContainer" style="visibility: hidden;" class="DetailsContainer">
-        <h3 style="margin-bottom: 1rem;">Wählen Sie die gewünschte Frage aus.</h3>
-           
-   
-
-    </div>
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-  
-
-
-
-
-
-
-
-
-    <div class="col col2 ">
-      <h1>Peer Instructions</h1>
-        <button id="btnShowQuestion" class="">
-          Erste Fragenrunde
-        </button>
-        <button id="btnShowQuestion2" class="">
-          Zweite Fragenrunde
-        </button>
-
-        <button id="btnScore" class="">
-          Ergenmisse Veröffentlichen
-        </button>
-        
-        <div id="SelectedQuestion" style="visibility: hidden;" class="SelectedQuestion">
-            <h1 id="SelectedQuestionAnswer">Momentan ausgewählte Frage</h1>
-            <div id="right" class="empty rightempty">             
             </div>
-        </div>
-        
-      
 
-        <div id="ChartContainer" class="ChartContainer">  
-          <canvas style="visibility: hidden;" id="myChart">Durchschnitts-Performance</canvas>  
-        </div>
-        
-        <div id="SingleAnswersContainer">
+            <div id="ChartContainer" class="ChartContainer">
+                <canvas style="visibility: visible;" id="myChart">Durchschnitts-Performance</canvas>
+            </div>
+
+            <div id="SingleAnswersContainer">
+
+            </div>
 
         </div>
 
+        <div class="col col3">
+            <div id="message-container"></div>
+            <form id="send-container">
+                <input type="text" id="message-input">
+                <button type="submit" id="send-button">Send</button>
+            </form>
+        </div>
     </div>
 
-   
-  
-    <div class="col col3">
-      <div id="message-container"></div>
-       <form id="send-container">
-          <input type="text" id="message-input">
-          <button type="submit" id="send-button">Send</button>
-       </form>
-    </div>
-  </div>
-  
 </body>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-  <script defer src="performance.js"></script>
-  <script defer src ="loadQuestions.js"></script>
-  
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script defer src="js/performance.js"></script>
+<script defer src="js/loadQuestions.js"></script>
+
 </html>

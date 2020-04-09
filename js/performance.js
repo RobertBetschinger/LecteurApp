@@ -25,7 +25,7 @@ function clearChart(){
 let AntwortChart = new Chart(myChart,{
     type:'horizontalBar',
     data:{
-        labels:['Antwortmöglichkeit-1', 'Antwortmöglichkeit-2', 'Antwortmöglichkeit-3', 'Antwortmöglichkeit-4'],
+        labels: ['Antwortmöglichkeit-1:', 'Antwortmöglichkeit-2:', 'Antwortmöglichkeit-3:', 'Antwortmöglichkeit-4:'],
         datasets:[{
             label:'Anzahl',
             data:[
@@ -43,17 +43,21 @@ let AntwortChart = new Chart(myChart,{
             borderWidth:2,
             borderColor:'#777',
             hoverBorderWidth:3,
-            hoverBorderColor:'#000'
+            hoverBorderColor:'#000',
+            fontColor: '#ffffff'
         }]
     },
     options:{
         title:{
             display:true,
             text:'Live-Ergebnisse der Teilnehmer',
-            fontSize:25
+            fontSize:25,
+            fontColor: 'white'
         },
         legend:{
-            display:false
+            display:false,
+        
+            
         },
         layout:{
             padding:{
@@ -62,6 +66,41 @@ let AntwortChart = new Chart(myChart,{
                 bottom:0,
                 top:0
             }
-        }
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontColor: 'white'
+                  },
+            
+              display: true,
+              gridLines: {
+                display: false,
+                color: "#FFFFFF"
+              },
+              labels:{
+                  fontColor:'#ffffff'
+              },
+              scaleLabel: {
+                display: true,
+                color: "#FFFFFF"
+              }
+            }],
+            yAxes: [{
+                ticks:{
+                    fontColor:'white',
+                },
+              display: true,
+              gridLines: {
+                display: true,
+                color: "#FFFFFF"
+              },
+              scaleLabel: {
+                display: true,
+                color: "#FFFFFF"
+              }
+            }]
+          }
     }
 });

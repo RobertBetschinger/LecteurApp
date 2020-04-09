@@ -64,23 +64,33 @@ messageForm.addEventListener('submit', e => {
 //Question Bereich
 const btnShowQuestion = document.getElementById("btnShowQuestion");
 btnShowQuestion.addEventListener('click', function(){
-    console.log("aifdnjkajks")
-    document.getElementById("myChart").style.visibility ="visible"
-    const question = collectQuestion();
-    socket.emit('NewQuestion',question)
-    socket.emit('newPhase','Answering')
-    clearChart();
-    clearStudentAnswers();
-    
+    if(doesRightPArtContain){
+        const question = collectQuestion(); 
+        socket.emit('NewQuestion',question)
+        socket.emit('newPhase','Answering')
+        clearChart();
+        clearStudentAnswers();
+        document.getElementById("myChart").style.visibility ="visible"
+    }
+    else{
+        window.alert("Bitte nur eine Frage in den Auswhalbereich hinzufügen.")
+    }
 })
 
 //Question Bereich
 const btnShowQuestion2 = document.getElementById("btnShowQuestion2");
 btnShowQuestion2.addEventListener('click', function(){
-    const question = collectQuestion();
-    socket.emit('NewQuestion',question)
-    clearChart();
-    clearStudentAnswers();
+    if(doesRightPArtContain){
+        const question = collectQuestion(); 
+        socket.emit('NewQuestion',question)
+        socket.emit('newPhase','Answering')
+        clearChart();
+        clearStudentAnswers();
+        document.getElementById("myChart").style.visibility ="visible"
+    }
+    else{
+        window.alert("Bitte nur eine Frage in den Auswhalbereich hinzufügen.")
+    }
 })
 
 
@@ -102,23 +112,19 @@ function clearStudentAnswers(){
     SingleAnswersContainer.innerHTML = '';
 }
 
-//
-const SelectedQuestionPos0 = document.getElementById('SelectedQuestionPos0')
-const SelectedQuestionPos1 = document.getElementById('SelectedQuestionPos1')
-const SelectedQuestionPos2 = document.getElementById('SelectedQuestionPos2')
-const SelectedQuestionPos3 = document.getElementById('SelectedQuestionPos3')
-const SelectedQuestionPos4 = document.getElementById('SelectedQuestionPos4')
+
 
 function collectQuestion(){
-
+    var rightContainer = document.getElementById("right")
+    let matches = rightContainer.querySelectorAll('.draggable');
+    
     const question ={
-        ques:     SelectedQuestionPos0.innerText ,
-        antwort1: SelectedQuestionPos1.innerText ,
-        antwort2: SelectedQuestionPos2.innerText ,
-        antwort3: SelectedQuestionPos3.innerText ,
-        antwort4: SelectedQuestionPos4.innerText 
+        ques:     matches[0].querySelector(".details").querySelector(".ques").innerHTML ,
+        antwort1: matches[0].querySelector(".details").querySelector(".first").innerHTML ,
+        antwort2: matches[0].querySelector(".details").querySelector(".second").innerHTML ,
+        antwort3: matches[0].querySelector(".details").querySelector(".third").innerHTML ,
+        antwort4: matches[0].querySelector(".details").querySelector(".fourth").innerHTML
     }
-
     return question;
 }
 
