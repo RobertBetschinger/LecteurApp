@@ -41,6 +41,15 @@ h1{
     font-weight: 400;
     color: black;
     font-size: xx-large;
+
+    
+    &.lg-heading {
+      font-size: 2.4rem;
+    }
+}
+
+.text-secondary {
+  color: $secondary-color;
 }
 
 .flex-container{
@@ -63,12 +72,11 @@ h1{
 
 .col1{
     height: 100vh;
-
 }
 
 
 .col2{
-    
+  background:rgba($primary-color, $background-opacity) ;
     height: 100vh;
     flex-grow: 2;
 }
@@ -131,6 +139,7 @@ h1{
     display: flex;
     flex-direction: column;
     align-items: center;
+ 
 }
 
 .custom-select{
@@ -196,7 +205,7 @@ h1{
   .containerRight{
     width:50%;
     max-height: 280px;
-
+    min-height: 250px;
     overflow-y: scroll;
   }
   .containerLeft{
@@ -241,6 +250,10 @@ h1{
 
 .details:hover{
   background-color: #3e8e41;
+}
+
+.ChartContainer{
+  margin-top: 2rem;
 }
 
 @import 'menu';

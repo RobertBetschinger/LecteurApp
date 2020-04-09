@@ -38,6 +38,11 @@ h1 {
   font-weight: 400;
   color: black;
   font-size: xx-large; }
+  h1.lg-heading {
+    font-size: 2.4rem; }
+
+.text-secondary {
+  color: #eece1a; }
 
 .flex-container {
   display: flex;
@@ -58,6 +63,7 @@ h1 {
   height: 100vh; }
 
 .col2 {
+  background: rgba(68, 68, 68, 0.9);
   height: 100vh;
   flex-grow: 2; }
 
@@ -170,6 +176,7 @@ h1 {
 .containerRight {
   width: 50%;
   max-height: 280px;
+  min-height: 250px;
   overflow-y: scroll; }
 
 .containerLeft {
@@ -206,6 +213,9 @@ h1 {
 
 .details:hover {
   background-color: #3e8e41; }
+
+.ChartContainer {
+  margin-top: 2rem; }
 
 .menu-btn {
   position: absolute;
