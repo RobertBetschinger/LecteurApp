@@ -10,13 +10,13 @@ console.log(socket);
 
 //const name = prompt('What is your name?')
 const name = "Lecteur"
-appendMessage('you Joined')
+appendMessage('You:', 'joined')
 socket.emit('New User', name)
 
 
 //Socket Part
 socket.on('chat-message', data =>{
-    appendMessage(`${data.name}: ${data.message}`)
+    appendMessage(`${data.name}:`,`${data.message}`)
 })
 
 socket.on('Person joined', name =>{
@@ -48,19 +48,30 @@ socket.on('new-question-round', value =>{
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
-    appendMessage(`You: ${message}`)
+    appendMessage(name, '${message}')
     socket.emit('send-chat-message', message)
     messageInput.value = ''
   })
 
-  function appendMessage(message) {
+  function appendMessage(name,message) {
     const messageElement = document.createElement('div')
-    messageElement.innerText = message
+    var html =[
+        '<span class="NameChat">' + name +'</span>',
+        '<p class="chatMessage">' + message +'</p>'
+    ]
+    messageElement.innerHTML = html
     messageElement.classList.add("OuterMessage");
     messageContainer.append(messageElement)
   }
 
 
+  
+  // $("#QuestionsLeftContainer").append(html);
+
+
+
+
+  
 //Question Bereich
 const btnShowQuestion = document.getElementById("btnShowQuestion");
 btnShowQuestion.addEventListener('click', function(){

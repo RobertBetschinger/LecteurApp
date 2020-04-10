@@ -26,6 +26,7 @@
         <nav class="menu">
           <div class="menu-branding">
             <div class="portrait"></div>
+            
           </div>
           <ul class="menu-nav">
             <li class="nav-item current">
@@ -104,7 +105,7 @@
             </div>
 
             <div id="ChartContainer" class="ChartContainer">
-                <canvas style="visibility: visible;" id="myChart">Durchschnitts-Performance</canvas>
+                <canvas style="visibility: hidden;" id="myChart">Durchschnitts-Performance</canvas>
             </div>
 
             <div id="SingleAnswersContainer">
@@ -114,7 +115,12 @@
         </div>
 
         <div class="col col3">
-            <div id="message-container"></div>
+            <div id="message-container" class="messageContainer">
+
+
+            </div>
+
+
             <form id="send-container">
                 <input type="text" id="message-input">
                 <button type="submit" id="send-button">Send</button>
