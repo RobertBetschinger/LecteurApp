@@ -10,21 +10,21 @@ console.log(socket);
 
 //const name = prompt('What is your name?')
 const name = "Lecteur"
-appendMessage('You:', 'joined')
-socket.emit('New User', name)
+appendMessage('You: ', 'joined', true)
+socket.emit('New User', name,true)
 
 
 //Socket Part
 socket.on('chat-message', data =>{
-    appendMessage(`${data.name}:`,`${data.message}`)
+    appendMessage(`${data.name}: `,`${data.message}`,false)
 })
 
 socket.on('Person joined', name =>{
-    appendMessage(`${name} Connected`)
+    appendMessage(`${name}: `, `Connected`,false)
 } )
 
 socket.on('Person Disconnected', name =>{
-    appendMessage(`${name} Disconnected`)
+    appendMessage(`${name}: `, `Disconnected`,false)
 } )
 
 socket.on('NewQuestion', question =>{
@@ -48,30 +48,28 @@ socket.on('new-question-round', value =>{
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
-    appendMessage(name, '${message}')
+    appendMessage('You: ', message,true)
     socket.emit('send-chat-message', message)
     messageInput.value = ''
   })
 
-  function appendMessage(name,message) {
+  function appendMessage(name,message,position) {
     const messageElement = document.createElement('div')
+    messageElement.innerHTML=name
     var html =[
-        '<span class="NameChat">' + name +'</span>',
-        '<p class="chatMessage">' + message +'</p>'
-    ]
+        '<p class="text-ChatMessage"><span class="text-chatName">' + name +'</span>' +message +'</p>'
+    ].join("\n");
     messageElement.innerHTML = html
-    messageElement.classList.add("OuterMessage");
+    if(position){
+        messageElement.classList.add("OuterMessageLeft");
+    }
+    else{
+        messageElement.classList.add("OuterMessageRight");
+    }
+    
     messageContainer.append(messageElement)
   }
-
-
-  
-  // $("#QuestionsLeftContainer").append(html);
-
-
-
-
-  
+ 
 //Question Bereich
 const btnShowQuestion = document.getElementById("btnShowQuestion");
 btnShowQuestion.addEventListener('click', function(){

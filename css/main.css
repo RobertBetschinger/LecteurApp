@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -177,10 +178,10 @@ h1 {
   width: 50%;
   max-height: 280px;
   min-height: 250px;
-  overflow-y: scroll; }
+  overflow-y: auto; }
 
 .containerLeft {
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%; }
 
 .draggable {
@@ -220,11 +221,15 @@ h1 {
 .messageContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   height: 90%;
-  background-color: black; }
+  overflow-y: auto;
+  margin-top: 40px;
+  background: rgba(30, 30, 30, 0.2);
+  border-radius: 12px; }
 
-.OuterMessage {
+.OuterMessageLeft {
+  opacity: 1;
+  align-self: flex-start;
   margin: 5px;
   max-width: 33%;
   overflow-wrap: break-word;
@@ -232,12 +237,29 @@ h1 {
   height: auto;
   background-color: green;
   padding: 10px;
-  color: white;
   border-radius: 12px;
   border: 3px darkgreen solid; }
 
-.ChatName {
-  color: blue; }
+.OuterMessageRight {
+  align-self: flex-end;
+  margin: 5px;
+  max-width: 33%;
+  overflow-wrap: break-word;
+  text-align: left;
+  height: auto;
+  background-color: green;
+  padding: 10px;
+  border-radius: 12px;
+  border: 3px darkgreen solid; }
+
+.text-ChatMessage {
+  color: white;
+  font-style: italic;
+  font-size: medium; }
+
+.text-chatName {
+  color: black;
+  font-size: larger; }
 
 @media screen and (max-width: 768px) {
   main {
@@ -272,6 +294,8 @@ h1 {
     grid-template-columns: repeat(2, 1fr); } }
 
 @media screen and (max-width: 500px) {
+  .menu-branding {
+    height: 50vh; }
   .col2 {
     background: rgba(68, 68, 68, 0.9);
     height: auto; }
@@ -291,7 +315,7 @@ h1 {
   position: absolute;
   z-index: 5;
   right: 35px;
-  top: 35px;
+  top: 28px;
   cursor: pointer;
   transition: all 0.5s ease-out; }
   .menu-btn .btn-line {
@@ -342,9 +366,9 @@ h1 {
     .menu-branding.show {
       transform: translate3d(0, 0, 0); }
     .menu-branding .portrait {
-      width: 250px;
-      height: 250px;
-      background: url("../img/portrait.jpg");
+      width: 220px;
+      height: 220px;
+      background: url("../img/Universität_Regensburg_logo.svg");
       border-radius: 50%;
       border: solid 3px #eece1a; }
   .menu .nav-item {
@@ -361,7 +385,7 @@ h1 {
     text-transform: uppercase;
     padding: 1rem 0;
     font-weight: 300;
-    color: set-text-color(#444);
+    color: white;
     text-decoration: none;
     transition: all 0.5s ease-out; }
     .menu .nav-link:hover {
