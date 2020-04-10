@@ -24,10 +24,6 @@
         </div>
     
         <nav class="menu">
-          <div class="menu-branding">
-            <div class="portrait"></div>
-            
-          </div>
           <ul class="menu-nav">
             <li class="nav-item">
               <a href="index.html" class="nav-link current">
@@ -55,6 +51,10 @@
               </a>
             </li>
           </ul>
+          <div class="menu-branding">
+            <div class="portrait"></div>           
+          </div>
+          
         </nav>
       </header>
     
@@ -120,11 +120,12 @@
 
             </div>
 
-
-            <form id="send-container">
-                <input type="text" id="message-input">
-                <button type="submit" id="send-button">Send</button>
+            <div class="sendFormContainer">
+            <form class="send-container" id="send-container" class="send-container">
+                <input  type="text" id="message-input" class="text-input" placeholder="Your Message">
+                <button type="submit" class="send-button"id="send-button">Send</button>
             </form>
+          </div>
         </div>
     </div>
 

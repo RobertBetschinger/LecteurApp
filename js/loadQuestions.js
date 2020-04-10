@@ -69,6 +69,7 @@ $(document).ready(function () {
       //Show Questions Containers, load Question into box
       document.getElementById("DetailsContainer").style.visibility = "visible";
       document.getElementById("SelectedQuestion").style.visibility = "visible";
+      console.log(fragenArray)
       appendEmptyContainer(fragenArray);
     } catch (error) {
       console.log(error);
@@ -110,8 +111,7 @@ $(document).ready(function () {
     document.getElementById("ChartContainer").style.visibility = "hidden";
   }
 
-  //Ad If Statement in Append Function d0ne, Optimize Styling,
-  //Div container with scrollbar, Read out right Container done
+
   
   function appendEmptyContainer(fragenArray) {
     fragenArray.forEach((element) => {
@@ -121,10 +121,17 @@ $(document).ready(function () {
         '<div class="details">',
         '<p class="ques">' + element.question + "</p>",
         "<ul>",
-        '<li class="first">' + element.answers[0].aText + '</li>',
+        '<li class="first">' + element.answers[0].aText  + '</li>',
         '<li class="second">'  + element.answers[1].aText + '</li>',
-        '<li class="third">'    + element.answers[2].aText + "  </li>",
-        '<li class="fourth">'    + element.answers[3].aText + "  </li>",
+        '<li class="third">'    + element.answers[2].aText  +"  </li>",
+        '<li class="fourth">'    + element.answers[3].aText +  "  </li>",
+        "<br>",
+        "</ul>",
+        '<ul class="solutions" style="display:none">',
+        '<li class="firstSolution">'  +element.answers[0].trueOrFalse + '</li>',
+        '<li class="secondSolution">'  + element.answers[1].trueOrFalse + '</li>',
+        '<li class="thirdSolution">'    +  element.answers[2].trueOrFalse  + "  </li>",
+        '<li class="fourthSolution">'    +element.answers[3].trueOrFalse + "  </li>",
         "<br>",
         "</ul>",
         "<h3>Triggertyp: " + element.triggerType + " </h3>",
@@ -201,12 +208,14 @@ $(document).ready(function () {
   }
   
 
-  function doesRightPArtContain() {
-      
+  function doesRightPArtContain() { 
         var rightContainer = document.getElementById("right")
         let matches = rightContainer.querySelectorAll('.draggable');
         if(matches.length >= 2){
            return false;
+        }
+        if(matches.length ==0){
+          return false;
         }
         else{
             return true;

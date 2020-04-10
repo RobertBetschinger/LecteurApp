@@ -65,7 +65,7 @@
     &-nav {
       margin: 0;
       padding: 0;
-      background: darken($primary-color, 5);
+      background: $primary-color;
       list-style: none;
       transform: translate3d(0, -100%, 0);
       @include easeOut;
@@ -78,8 +78,8 @@
   
     // Branding Side
     &-branding {
-      
-      background: $primary-color;
+      background: darken($primary-color, 5);
+     
       transform: translate3d(0, 100%, 0);
       @include easeOut;
   
@@ -98,7 +98,7 @@
     }
   
     .nav-item {
-      transform: translate3d(600px, 0, 0);
+      transform: translate3d(-600px, 0, 0);
       @include easeOut;
   
       &.show {

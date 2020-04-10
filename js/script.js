@@ -33,7 +33,7 @@ socket.on('NewQuestion', question =>{
 } )
 
 socket.on('question-answered', PersonData =>{
-    appendStudentAnswered(PersonData.name,PersonData.value)
+    appendMessageErgebniss(PersonData.name,PersonData.value)
     adddata(PersonData.value);
 })
 
@@ -54,6 +54,7 @@ messageForm.addEventListener('submit', e => {
   })
 
   function appendMessage(name,message,position) {
+      
     const messageElement = document.createElement('div')
     messageElement.innerHTML=name
     var html =[
@@ -69,36 +70,98 @@ messageForm.addEventListener('submit', e => {
     
     messageContainer.append(messageElement)
   }
+
+  function appendMessageErgebniss(name,value) {
+      
+    const messageElement = document.createElement('div')
+    messageElement.innerHTML=name
+    var html =[
+        '<p class="text-ChatMessage">' + name +' hat mit Antwortmöglichkeit: ' + value + ' geantwortet.</p>'
+    ].join("\n");
+    messageElement.innerHTML = html
+    console.log(value)
+    console.log(SolutionsForAnswers.antwort2Sol)
+         if(value==1 && SolutionsForAnswers.antwort1Sol === true){
+        messageElement.classList.add("OuterMessageMiddleRight");
+      }
+      if(value==2){
+        var bool= SolutionsForAnswers.antwort2Sol;
+        console.log("Bool foloows:" + bool)
+        if(bool == "true"){
+            messageElement.classList.add("OuterMessageMiddleRight");
+        }
+        
+        }
+        if(value==3 && SolutionsForAnswers.antwort3Sol === true){
+            messageElement.classList.add("OuterMessageMiddleRight");
+        }
+        if(value==4 && SolutionsForAnswers.antwort4Sol === true){
+            messageElement.classList.add("OuterMessageMiddleRight");
+        }
+
+        if(value==1 && SolutionsForAnswers.antwort1Sol != true){
+            messageElement.classList.add("OuterMessageMiddleFalse");
+          }
+          if(value==2){
+            var bool= SolutionsForAnswers.antwort2Sol;
+            console.log("Bool foloows:" + bool)
+            if(bool != "true"){
+                messageElement.classList.add("OuterMessageMiddleFalse");
+            }
+            
+            }
+            if(value==3 && SolutionsForAnswers.antwort3Sol != true){
+                messageElement.classList.add("OuterMessageMiddleFalse");
+            }
+            if(value==4 && SolutionsForAnswers.antwort4Sol != true){
+                messageElement.classList.add("OuterMessageMiddleFalse");
+            }
+      
+    messageContainer.append(messageElement)
+  }
+
+
  
+
+let SolutionsForAnswers;
+
+
+
 //Question Bereich
 const btnShowQuestion = document.getElementById("btnShowQuestion");
 btnShowQuestion.addEventListener('click', function(){
-    if(doesRightPArtContain){
+    var whatisTrue = doesRightPArtContain();
+    
+    if(whatisTrue){
         const question = collectQuestion(); 
+        SolutionsForAnswers =collectRightAnswers();
         socket.emit('NewQuestion',question)
         socket.emit('newPhase','Answering')
         clearChart();
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility ="visible"
+        alert("Questions was sucessfully published.")
     }
     else{
-        window.alert("Bitte nur eine Frage in den Auswhalbereich hinzufügen.")
+        window.alert("Bitte genau eine Frage in den Auswhalbereich hinzufügen.")
     }
 })
 
 //Question Bereich
 const btnShowQuestion2 = document.getElementById("btnShowQuestion2");
 btnShowQuestion2.addEventListener('click', function(){
-    if(doesRightPArtContain){
+    var whatisTrue = doesRightPArtContain();
+    if(whatisTrue){
         const question = collectQuestion(); 
         socket.emit('NewQuestion',question)
         socket.emit('newPhase','Answering')
         clearChart();
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility ="visible"
+        alert("Questions was sucessfully published.")
     }
     else{
-        window.alert("Bitte nur eine Frage in den Auswhalbereich hinzufügen.")
+        window.alert("Bitte genau eine Frage in den Auswhalbereich hinzufügen.")
     }
 })
 
@@ -137,13 +200,27 @@ function collectQuestion(){
     return question;
 }
 
-function updateSelectedQuestion(question){
-    SelectedQuestionPos0.innerHTML ='',
-    SelectedQuestionPos1.innerHTML =''
-    SelectedQuestionPos2.innerHTML =''
-    SelectedQuestionPos3.innerHTML =''
-    SelectedQuestionPos4.innerHTML =''
+
+function collectRightAnswers(){
+    var rightContainer = document.getElementById("right")
+    let matches = rightContainer.querySelectorAll('.draggable');
+
+    const questionSols={
+
+    
+    antwort1Sol : matches[0].querySelector(".details").querySelector(".firstSolution").innerHTML ,
+    antwort2Sol : matches[0].querySelector(".details").querySelector(".secondSolution").innerHTML ,
+    antwort3Sol : matches[0].querySelector(".details").querySelector(".thirdSolution").innerHTML ,
+    antwort4Sol : matches[0].querySelector(".details").querySelector(".fourthSolution").innerHTML
+    }
+    console.log(questionSols.antwort1Sol)
+    console.log(questionSols.antwort2Sol)
+    console.log(questionSols.antwort3Sol)
+    console.log(questionSols.antwort4Sol)
+    return questionSols;
+
 }
+
 
 
 

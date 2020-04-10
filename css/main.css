@@ -9,7 +9,7 @@
 body {
   background: #444;
   background-color: #5e5e5e;
-  height: 100%;
+  height: auto;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.5; }
@@ -29,8 +29,10 @@ body {
 
 header {
   position: fixed;
-  z-index: 2;
-  width: 100%; }
+  z-index: 99;
+  width: 100%;
+  display: flex;
+  flex-direction: row; }
 
 p {
   color: black; }
@@ -216,7 +218,7 @@ h1 {
   background-color: #3e8e41; }
 
 .ChartContainer {
-  margin-top: 2rem; }
+  margin-top: 1rem; }
 
 .messageContainer {
   display: flex;
@@ -252,6 +254,44 @@ h1 {
   border-radius: 12px;
   border: 3px darkgreen solid; }
 
+.OuterMessageMiddleRight {
+  align-self: center;
+  margin: 5px;
+  max-width: 50%;
+  overflow-wrap: break-word;
+  text-align: center;
+  height: auto;
+  background-color: green;
+  padding: 5px;
+  border-radius: 12px;
+  border: 3px darkgreen solid; }
+  .OuterMessageMiddleRight .text-chatName {
+    color: black;
+    font-size: smaller; }
+  .OuterMessageMiddleRight .text-ChatMessage {
+    color: white;
+    font-style: italic;
+    font-size: small; }
+
+.OuterMessageMiddleFalse {
+  align-self: center;
+  margin: 5px;
+  max-width: 50%;
+  overflow-wrap: break-word;
+  text-align: center;
+  height: auto;
+  background-color: red;
+  padding: 5px;
+  border-radius: 12px;
+  border: 3px darkred solid; }
+  .OuterMessageMiddleFalse .text-chatName {
+    color: black;
+    font-size: smaller; }
+  .OuterMessageMiddleFalse .text-ChatMessage {
+    color: white;
+    font-style: italic;
+    font-size: small; }
+
 .text-ChatMessage {
   color: white;
   font-style: italic;
@@ -260,6 +300,28 @@ h1 {
 .text-chatName {
   color: black;
   font-size: larger; }
+
+.sendFormContainer {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%; }
+
+.send-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: larger; }
+
+.send-container {
+  width: 100%; }
+
+.text-input {
+  padding: 16px 32px;
+  width: 80%; }
 
 @media screen and (max-width: 768px) {
   main {
@@ -353,14 +415,14 @@ h1 {
   .menu-nav {
     margin: 0;
     padding: 0;
-    background: #373737;
+    background: #444;
     list-style: none;
     transform: translate3d(0, -100%, 0);
     transition: all 0.5s ease-out; }
     .menu-nav.show {
       transform: translate3d(0, 0, 0); }
   .menu-branding {
-    background: #444;
+    background: #373737;
     transform: translate3d(0, 100%, 0);
     transition: all 0.5s ease-out; }
     .menu-branding.show {
@@ -372,7 +434,7 @@ h1 {
       border-radius: 50%;
       border: solid 3px #eece1a; }
   .menu .nav-item {
-    transform: translate3d(600px, 0, 0);
+    transform: translate3d(-600px, 0, 0);
     transition: all 0.5s ease-out; }
     .menu .nav-item.show {
       transform: translate3d(0, 0, 0); }
