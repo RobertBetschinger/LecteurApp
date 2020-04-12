@@ -1,5 +1,5 @@
-//const socket = io('https://peer-instructions-server.herokuapp.com')
-const socket = io('http://localhost:5000')
+const socket = io('https://peer-instructions-server.herokuapp.com')
+//const socket = io('http://localhost:5000')
 const messageContainer = document.getElementById('message-container')
 const SingleAnswersContainer = document.getElementById('SingleAnswersContainer')
 const messageForm = document.getElementById('send-container')
@@ -8,8 +8,8 @@ const messageInput = document.getElementById('message-input')
 
 console.log(socket);
 
-//const name = prompt('What is your name?')
-const name = "Lecteur"
+const name = prompt('What is your name?')
+//const name = "Lecteur"
 appendMessage('You: ', 'joined', true)
 socket.emit('New User', name,true)
 
