@@ -44,6 +44,8 @@ socket.on('new-question-round', value =>{
 
 
 
+
+
 //Chat
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
@@ -140,6 +142,10 @@ btnShowQuestion.addEventListener('click', function(){
         clearChart();
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility ="visible"
+        btnLecteuring.style.backgroundColor ="dodgerblue"
+        btnShowQuestion.style.backgroundColor="yellow"
+        btnShowQuestion2.style.backgroundColor="dodgerblue"
+        btnShowScore.style.backgroundColor="dodgerblue"
         alert("Questions was sucessfully published.")
     }
     else{
@@ -158,6 +164,10 @@ btnShowQuestion2.addEventListener('click', function(){
         clearChart();
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility ="visible"
+        btnLecteuring.style.backgroundColor ="dodgerblue"
+        btnShowQuestion.style.backgroundColor="dodgerblue"
+        btnShowQuestion2.style.backgroundColor="yellow"
+        btnShowScore.style.backgroundColor="dodgerblue"
         alert("Questions was sucessfully published.")
     }
     else{
@@ -165,10 +175,26 @@ btnShowQuestion2.addEventListener('click', function(){
     }
 })
 
+const btnLecteuring = document.getElementById("btnLecteuring")
+btnLecteuring.addEventListener('click', function(){
+    socket.emit('newPhase','Lecteuring')
+    clearChart();
+    clearStudentAnswers();
+    document.getElementById("myChart").style.visibility ="hidden"
+    btnLecteuring.style.backgroundColor ="yellow"
+    btnShowQuestion.style.backgroundColor="dodgerblue"
+    btnShowQuestion2.style.backgroundColor="dodgerblue"
+    btnShowScore.style.backgroundColor="dodgerblue"
+})
+
 
 //Send Statistics
 const btnShowScore = document.getElementById("btnScore");
 btnScore.addEventListener('click', function(){ 
+    btnLecteuring.style.backgroundColor ="dodgerblue"
+    btnShowQuestion.style.backgroundColor="dodgerblue"
+    btnShowQuestion2.style.backgroundColor="dodgerblue"
+    btnShowScore.style.backgroundColor="yellow"
 socket.emit('showStatistics')
 })
 
