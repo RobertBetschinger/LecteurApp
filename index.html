@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lecteur App</title>
      <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>
-   <!-- <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>-->
+    <!--<script defer src="http://localhost:5000/socket.io/socket.io.js"></script>-->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="emojionearea.min.css">
+ 
     <script defer src="js/script.js"></script>
+    <script defer src="emojionearea.min.js"></script>
 
+    <script defer src="js/main.js"></script>
 </head>
 
 <body id="bg-img">
@@ -123,9 +126,11 @@
 
             </div>
 
+
+            
             <div class="sendFormContainer">
             <form class="send-container" id="send-container" class="send-container">
-                <input  type="text" id="message-input" class="text-input" placeholder="Your Message">
+                <input  type="text" style="display: none;" id="message-input" class="text-input" placeholder="Your Message">
                 <button type="submit" class="send-button"id="send-button">Send</button>
             </form>
           </div>
@@ -137,5 +142,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script defer src="js/performance.js"></script>
 <script defer src="js/loadQuestions.js"></script>
+<script>
+
+  $(document).ready(()=>{
+    $("#message-input").emojioneArea();
+  })
+</script>
 
 </html>

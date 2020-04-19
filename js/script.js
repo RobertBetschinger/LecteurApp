@@ -53,6 +53,7 @@ messageForm.addEventListener('submit', e => {
     appendMessage('You: ', message,true)
     socket.emit('send-chat-message', message)
     messageInput.value = ''
+    $("#message-input").data("emojioneArea").setText('');
   })
 
   function appendMessage(name,message,position) {
