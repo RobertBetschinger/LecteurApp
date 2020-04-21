@@ -2,140 +2,141 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lecteur App</title>
-     <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>
-    <!--<script defer src="http://localhost:5000/socket.io/socket.io.js"></script>-->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="emojionearea.min.css">
- 
-    <script defer src="js/script.js"></script>
-    <script defer src="emojionearea.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lecteur App</title>
+  
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/emojionearea.min.css">
 
-    <script defer src="js/main.js"></script>
+  
+  <script defer src="https://peer-instructions-server.herokuapp.com/socket.io/socket.io.js"></script>
+  <!--<script defer src="http://localhost:5000/socket.io/socket.io.js"></script>-->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script defer src="js/script.js"></script>
+  <script defer src="js/emojionearea.min.js"></script>
+  <script defer src="js/main.js"></script>
 </head>
 
 <body id="bg-img">
-    <header>
-        <div class="menu-btn">
-          <div class="btn-line"></div>
-          <div class="btn-line"></div>
-          <div class="btn-line"></div>
-        </div>
-    
-        <nav class="menu">
-          <ul class="menu-nav">
-            <li class="nav-item">
-              <a href="index.html" class="nav-link current">
-                Dozentenapp
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="about.html" class="nav-link">
-                Studentenapp
-              </a>
-            </li>
-            <li class="nav-item current">
-              <a href="work.html" class="nav-link">
-                Lecteur App
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="Interests.html" class="nav-link">
-                Student App
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="contact.html" class="nav-link">
-                Contact
-              </a>
-            </li>
-          </ul>
-          <div class="menu-branding">
-            <div class="portrait"></div>           
-          </div>
-          
-        </nav>
-      </header>
-    
-    
-    
-    <div class="flex-container">
-        <div class="col col1">
-            <div>
-                <h1 class="lg-heading">Questions/<span class="text-secondary">Lecteuring</span></h1>
-                <h3>Choose a Question-Category for the Workshop and<span class="text-secondary"> load the Questions.</span></h3>
-            </div>
-            <div class="custom-select">
-
-                <select id="selectCategorys" name="selectCategorys" size="1" class="select-css"> </select>
-
-                <button id="loadQuestions" onclick="loadParameters()" class="button button1">
-                    Load Questions
-                </button>
-            </div>
-
-            <div id="DetailsContainer" style="visibility: hidden;" class="DetailsContainer">
-                <h3 >Choose a Question via<span class="text-secondary"> Drag/Drop!</span></h3>
-                <div id="QuestionsLeftContainer" class="container containerLeft">
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col col2 ">
-            <h1 class="lg-heading">Peer <span class="text-secondary"> Instructions</span></h1>
-            <button id="btnShowQuestion" class="buttonCol2 button1">
-                1. Question-Round
-            </button>
-            <button id="btnShowQuestion2" class="buttonCol2 button1">
-                2. Question-Round
-            </button>
-            <button id="btnLecteuring" class="buttonCol2 button1">
-              Lecteuring
-          </button>
-
-            <button id="btnScore" class="buttonCol2 button1">
-                Show Results
-            </button>
-
-            <div id="SelectedQuestion" style="visibility: hidden;" class="SelectedQuestion">
-                <h1 id="SelectedQuestionAnswer">Currently<span class="text-secondary"> Selected</span>  Question</h1>
-                <div id="right" class="container containerRight">
-                  
-                </div>
-
-            </div>
-
-            <div id="ChartContainer" class="ChartContainer">
-                <canvas style="visibility: hidden;" id="myChart">Durchschnitts-Performance</canvas>
-            </div>
-
-            <div id="SingleAnswersContainer">
-
-            </div>
-
-        </div>
-
-        <div class="col col3">
-            <div id="message-container" class="messageContainer">
-
-
-            </div>
-
-
-            
-            <div class="sendFormContainer">
-            <form class="send-container" id="send-container" class="send-container">
-                <input  type="text" style="display: none;" id="message-input" class="text-input" placeholder="Your Message">
-                <button type="submit" class="send-button"id="send-button">Send</button>
-            </form>
-          </div>
-        </div>
+  <header>
+    <div class="menu-btn">
+      <div class="btn-line"></div>
+      <div class="btn-line"></div>
+      <div class="btn-line"></div>
     </div>
+
+    <nav class="menu">
+      <ul class="menu-nav">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link current">
+            Dozentenapp
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">
+            Studentenapp
+          </a>
+        </li>
+        <li class="nav-item current">
+          <a href="work.html" class="nav-link">
+            Lecteur App
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a href="Interests.html" class="nav-link">
+            Student App
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">
+            Contact
+          </a>
+        </li>
+      </ul>
+      <div class="menu-branding">
+        <div class="portrait"></div>
+      </div>
+
+    </nav>
+  </header>
+
+
+
+  <div class="flex-container">
+    <div class="col col1">
+      <div>
+        <h1 class="lg-heading">Questions/<span class="text-secondary">Lecteuring</span></h1>
+        <h3>Choose a Question-Category for the Workshop and<span class="text-secondary"> load the Questions.</span></h3>
+      </div>
+      <div class="custom-select">
+
+        <select id="selectCategorys" name="selectCategorys" size="1" class="select-css"> </select>
+
+        <button id="loadQuestions" onclick="loadParameters()" class="button button1">
+          Load Questions
+        </button>
+      </div>
+
+      <div id="DetailsContainer" style="visibility: hidden;" class="DetailsContainer">
+        <h3>Choose a Question via<span class="text-secondary"> Drag/Drop!</span></h3>
+        <div id="QuestionsLeftContainer" class="container containerLeft">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col col2 ">
+      <h1 class="lg-heading">Peer <span class="text-secondary"> Instructions</span></h1>
+      <button id="btnShowQuestion" class="buttonCol2 button1">
+        1. Question-Round
+      </button>
+      <button id="btnShowQuestion2" class="buttonCol2 button1">
+        2. Question-Round
+      </button>
+      <button id="btnLecteuring" class="buttonCol2 button1">
+        Lecteuring
+      </button>
+
+      <button id="btnScore" class="buttonCol2 button1">
+        Show Results
+      </button>
+
+      <div id="SelectedQuestion" style="visibility: hidden;" class="SelectedQuestion">
+        <h1 id="SelectedQuestionAnswer">Currently<span class="text-secondary"> Selected</span> Question</h1>
+        <div id="right" class="container containerRight">
+
+        </div>
+
+      </div>
+
+      <div id="ChartContainer" class="ChartContainer">
+        <canvas style="visibility: hidden;" id="myChart">Durchschnitts-Performance</canvas>
+      </div>
+
+      <div id="SingleAnswersContainer">
+
+      </div>
+
+    </div>
+
+    <div class="col col3">
+      <div id="message-container" class="messageContainer">
+
+
+      </div>
+
+
+
+      <div class="sendFormContainer">
+        <form class="send-container" id="send-container" class="send-container">
+          <input type="text" style="display: none;" id="message-input" class="text-input" placeholder="Your Message">
+          <button type="submit" class="send-button" id="send-button">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
 </body>
 
@@ -143,8 +144,7 @@
 <script defer src="js/performance.js"></script>
 <script defer src="js/loadQuestions.js"></script>
 <script>
-
-  $(document).ready(()=>{
+  $(document).ready(() => {
     $("#message-input").emojioneArea();
   })
 </script>
