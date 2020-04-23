@@ -155,6 +155,19 @@ function appendEmptyContainer(fragenArray) {
         '<li class="fourth">' + element.answers[3].aText + "  </li>",
         "<br>",
         "</ul>",
+        '<ul class="solutions" style="display:none">',
+        '<li class="firstSolution">' + element.answers[0].trueOrFalse + "</li>",
+        '<li class="secondSolution">' +
+          element.answers[1].trueOrFalse +
+          "</li>",
+        '<li class="thirdSolution">' +
+          element.answers[2].trueOrFalse +
+          "  </li>",
+        '<li class="fourthSolution">' +
+          element.answers[3].trueOrFalse +
+          "  </li>",
+        "<br>",
+        "</ul>",
         "</div>",
         "</div>",
       ].join("\n");
