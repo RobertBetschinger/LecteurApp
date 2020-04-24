@@ -1,5 +1,5 @@
-const socket = io("https://peer-instructions-server.herokuapp.com");
-//const socket = io('http://localhost:5000')
+//const socket = io("https://peer-instructions-server.herokuapp.com");
+const socket = io('http://localhost:5000')
 const messageContainer = document.getElementById("message-container");
 const SingleAnswersContainer = document.getElementById(
     "SingleAnswersContainer"
@@ -135,6 +135,7 @@ btnShowQuestion.addEventListener("click", function () {
         socket.emit("NewQuestion", question);
         socket.emit("newPhase", "Answering");
         clearChart();
+        changeLabels(question)
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility = "visible";
         btnLecteuring.style.backgroundColor = "dodgerblue";
@@ -156,6 +157,7 @@ btnShowQuestion2.addEventListener("click", function () {
         socket.emit("NewQuestion", question);
         socket.emit("newPhase", "Answering");
         clearChart();
+        changeLabels(question)
         clearStudentAnswers();
         document.getElementById("myChart").style.visibility = "visible";
         btnLecteuring.style.backgroundColor = "dodgerblue";
@@ -187,7 +189,8 @@ btnScore.addEventListener("click", function () {
     btnShowQuestion.style.backgroundColor = "dodgerblue";
     btnShowQuestion2.style.backgroundColor = "dodgerblue";
     btnShowScore.style.backgroundColor = "yellow";
-    socket.emit("showStatistics");
+    const question = collectQuestion();
+    socket.emit("showStatistics",question);
 });
 
 //Show new Student Data

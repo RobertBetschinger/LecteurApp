@@ -15,9 +15,18 @@ function clearChart() {
   AntwortChart.data.datasets[0].data[1] = 0;
   AntwortChart.data.datasets[0].data[2] = 0;
   AntwortChart.data.datasets[0].data[3] = 0;
+
   AntwortChart.update();
 }
 
+function changeLabels(question) {
+  AntwortChart.data.labels[0] = question.antwort1;
+  AntwortChart.data.labels[1] = question.antwort2;
+  AntwortChart.data.labels[2] = question.antwort3;
+  AntwortChart.data.labels[3] = question.antwort4;
+  AntwortChart.update();
+
+}
 let AntwortChart = new Chart(myChart, {
   type: "horizontalBar",
   data: {
