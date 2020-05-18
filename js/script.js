@@ -1,5 +1,5 @@
-//const socket = io("https://peer-instructions-server.herokuapp.com");
-const socket = io("http://localhost:5000");
+const socket = io("https://peer-instructions-server.herokuapp.com");
+//const socket = io("http://localhost:5000");
 const messageContainer = document.getElementById("message-container");
 const SingleAnswersContainer = document.getElementById(
   "SingleAnswersContainer"
