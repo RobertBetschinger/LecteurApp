@@ -48,61 +48,58 @@ socket.on("private-message", (privMessageObj) => {
 
 //Chat
 messageForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let selectedRoom = loadSelectedChatRoom();
-    partnerName = $("option:selected", selectNames).text();
-    const message = messageInput.value;
-    //Buiild in Must Chat
-    if (message == "") {
-      alert("Bitte geben Sie eine Nachricht in das Textfeld ein!");
-      return;
-    }
-  
-    if (selectedRoom === "group") {
-      appendMessage("You: ", message, true);
-      socket.emit("send-chat-message", message);
-      messageInput.value = "";
-      $("#message-input").data("emojioneArea").setText("");
-    } else {
-      const data = {
-        message: message,
-        id: selectedRoom,
-      };
-      socket.emit("Private-Message", data,(answer)=>{
-        if(answer){
-          alert("Pls dont send messages at yourself")
-        }
-        else{
-          appendMessagePrivateOwn("You: ", message, partnerName);
-          messageInput.value = "";
-          $("#message-input").data("emojioneArea").setText("");
-        }
-      });
-  
-    }
-  });
-
-  function appendMessagePrivateOwn(name, message, partnerName) {
-    const messageElement = document.createElement("div");
-  
-    var html = [
-      '<p class="text-ChatMessage"><span class="text-priv">' +
-        "This is a private message to: " +
-        partnerName +
-        "</span>" +
-        '<p class="text-ChatMessage"><span class="text-chatName">' +
-        name +
-        "</span>" +
-        message +
-        "</p>",
-    ].join("\n");
-    messageElement.innerHTML = html;
-  
-    messageElement.classList.add("OuterMessageLeft");
-  
-    messageContainer.append(messageElement);
+  e.preventDefault();
+  let selectedRoom = loadSelectedChatRoom();
+  partnerName = $("option:selected", selectNames).text();
+  const message = messageInput.value;
+  //Buiild in Must Chat
+  if (message == "") {
+    alert("Bitte geben Sie eine Nachricht in das Textfeld ein!");
+    return;
   }
 
+  if (selectedRoom === "group") {
+    appendMessage("You: ", message, true);
+    socket.emit("send-chat-message", message);
+    messageInput.value = "";
+    $("#message-input").data("emojioneArea").setText("");
+  } else {
+    const data = {
+      message: message,
+      id: selectedRoom,
+    };
+    socket.emit("Private-Message", data, (answer) => {
+      if (answer) {
+        alert("Pls dont send messages at yourself");
+      } else {
+        appendMessagePrivateOwn("You: ", message, partnerName);
+        messageInput.value = "";
+        $("#message-input").data("emojioneArea").setText("");
+      }
+    });
+  }
+});
+
+function appendMessagePrivateOwn(name, message, partnerName) {
+  const messageElement = document.createElement("div");
+
+  var html = [
+    '<p class="text-ChatMessage"><span class="text-priv">' +
+      "This is a private message to: " +
+      partnerName +
+      "</span>" +
+      '<p class="text-ChatMessage"><span class="text-chatName">' +
+      name +
+      "</span>" +
+      message +
+      "</p>",
+  ].join("\n");
+  messageElement.innerHTML = html;
+
+  messageElement.classList.add("OuterMessageLeft");
+
+  messageContainer.append(messageElement);
+}
 
 function appendMessagePrivateOthers(name, message) {
   const messageElement = document.createElement("div");
@@ -147,6 +144,7 @@ function appendMessage(name, message, position) {
 }
 
 function appendMessageErgebniss(name, value) {
+  console.log("AppendMessageErgebniss");
   const messageElement = document.createElement("div");
   messageElement.innerHTML = name;
   var html = [
@@ -157,40 +155,57 @@ function appendMessageErgebniss(name, value) {
       " geantwortet.</p>",
   ].join("\n");
   messageElement.innerHTML = html;
-  console.log(value);
-  console.log(SolutionsForAnswers.antwort2Sol);
-  if (value == 1 && SolutionsForAnswers.antwort1Sol === true) {
-    messageElement.classList.add("OuterMessageMiddleRight");
-  }
-  if (value == 2) {
-    var bool = SolutionsForAnswers.antwort2Sol;
-    console.log("Bool foloows:" + bool);
-    if (bool == "true") {
+
+  var antwort1 = SolutionsForAnswers.antwort1Sol == "true";
+  var antwort2 = SolutionsForAnswers.antwort2Sol == "true";
+  var antwort3 = SolutionsForAnswers.antwort3Sol == "true";
+  var antwort4 = SolutionsForAnswers.antwort4Sol == "true";
+
+  console.log(value)
+  console.log(antwort1)
+
+  if (value == 1) {
+    if (antwort1) {
       messageElement.classList.add("OuterMessageMiddleRight");
     }
   }
-  if (value == 3 && SolutionsForAnswers.antwort3Sol === true) {
-    messageElement.classList.add("OuterMessageMiddleRight");
+  if (value ==2) {
+    if (antwort2) {
+      messageElement.classList.add("OuterMessageMiddleRight");
+    }
   }
-  if (value == 4 && SolutionsForAnswers.antwort4Sol === true) {
-    messageElement.classList.add("OuterMessageMiddleRight");
+  if (value ==3) {
+    if (antwort3) {
+      messageElement.classList.add("OuterMessageMiddleRight");
+    }
   }
 
-  if (value == 1 && SolutionsForAnswers.antwort1Sol != true) {
-    messageElement.classList.add("OuterMessageMiddleFalse");
+  if (value==4) {
+    if (antwort4) {
+      messageElement.classList.add("OuterMessageMiddleRight");
+    }
   }
-  if (value == 2) {
-    var bool = SolutionsForAnswers.antwort2Sol;
-    console.log("Bool foloows:" + bool);
-    if (bool != "true") {
+
+  if (value == 1) {
+    if (!antwort1) {
       messageElement.classList.add("OuterMessageMiddleFalse");
     }
   }
-  if (value == 3 && SolutionsForAnswers.antwort3Sol != true) {
-    messageElement.classList.add("OuterMessageMiddleFalse");
+  if (value == 2) {
+    if (!antwort2) {
+      messageElement.classList.add("OuterMessageMiddleFalse");
+    }
   }
-  if (value == 4 && SolutionsForAnswers.antwort4Sol != true) {
-    messageElement.classList.add("OuterMessageMiddleFalse");
+
+  if (value == 3) {
+    if (!antwort3) {
+      messageElement.classList.add("OuterMessageMiddleFalse");
+    }
+  }
+  if (value == 4) {
+    if (!antwort4) {
+      messageElement.classList.add("OuterMessageMiddleFalse");
+    }
   }
 
   messageContainer.append(messageElement);
@@ -302,7 +317,7 @@ function collectRightAnswers() {
   var rightContainer = document.getElementById("right");
   let matches = rightContainer.querySelectorAll(".draggable");
 
-  const questionSols = {
+  let questionSols = {
     antwort1Sol: matches[0]
       .querySelector(".details")
       .querySelector(".firstSolution").innerHTML,
@@ -320,14 +335,14 @@ function collectRightAnswers() {
   console.log(questionSols.antwort2Sol);
   console.log(questionSols.antwort3Sol);
   console.log(questionSols.antwort4Sol);
+  console.log(questionSols);
   return questionSols;
 }
 
-
 socket.on("Group-Changed", (users) => {
-    console.log(users);
-    fillInDataInDropdownUsers(users);
-  });
+  console.log(users);
+  fillInDataInDropdownUsers(users);
+});
 
 const selectNames = document.getElementById("namesSelect");
 function fillInDataInDropdownUsers(users) {
@@ -348,7 +363,6 @@ function fillInDataInDropdownUsers(users) {
 }
 
 function loadSelectedChatRoom() {
-    value = $("select#namesSelect option:checked").val();
-    return value;
-  }
-  
+  value = $("select#namesSelect option:checked").val();
+  return value;
+}
