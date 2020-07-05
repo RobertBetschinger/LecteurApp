@@ -223,10 +223,12 @@ btnShowQuestion.addEventListener("click", function () {
     SolutionsForAnswers = collectRightAnswers();
     socket.emit("NewQuestion", question);
     socket.emit("newPhase", "Answering");
+    endTimer();
     clearChart();
     changeLabels(question);
     clearStudentAnswers();
     document.getElementById("myChart").style.visibility = "visible";
+    btnPeerDiscussion.style.backgroundColor ="dodgerblue"
     btnLecteuring.style.backgroundColor = "dodgerblue";
     btnShowQuestion.style.backgroundColor = "yellow";
     btnShowQuestion2.style.backgroundColor = "dodgerblue";
@@ -237,6 +239,81 @@ btnShowQuestion.addEventListener("click", function () {
   }
 });
 
+const btnPeerDiscussion = document.getElementById("btnDiscussion");
+btnPeerDiscussion.addEventListener("click",function(){
+  var whatisTrue = doesRightPArtContain();
+  if (whatisTrue) {
+    var time = prompt("Please enter the Time for the Peer Discussion in whole Minutes");
+    if(time!=null){
+     var minutes =  parseInt(time)
+      if(minutes == 0 ||isNaN(minutes) ) {
+        alert("Pls enter a whole Number the Next Time!")
+      }
+      else{
+        init(minutes)
+        socket.emit("newPhase", "Peer Discussion");
+        socket.emit("DiscussionTime", minutes)      
+        alert("You Started the Peer Discussion with " + minutes + " minutes");
+        btnPeerDiscussion.style.backgroundColor ="yellow"
+        btnLecteuring.style.backgroundColor = "dodgerblue";
+        btnShowQuestion.style.backgroundColor = "dodgerblue";
+        btnShowQuestion2.style.backgroundColor = "dodgerblue";
+        btnShowScore.style.backgroundColor = "dodgerblue";
+      }  
+     }   
+  } else {
+    window.alert("Bitte genau eine Frage in den Auswhalbereich hinzufügen.");
+  }
+} )
+
+function init(minutes) {
+	console.log('init');
+	var time_in_minutes = minutes;
+  start_countdown('div_clock', time_in_minutes);
+
+}
+
+function start_countdown(clockid, time_in_minutes) {
+	console.log("start_countdown");
+	//start the countdown
+	var current_time = Date.parse(new Date());
+	var deadline = new Date(current_time + time_in_minutes * 60 * 1000);
+	run_clock(clockid, deadline);
+}
+
+
+var timeinterval
+function run_clock(id, endtime) {
+	console.log("run_clock");
+  var clock = document.getElementById(id);
+  
+  
+  
+  function update_clock() {
+		var t = time_remaining(endtime);
+		clock.innerHTML = ((t.minutes).toString()).padStart(2, '0') + ':' + ((t.seconds).toString()).padStart(2, '0') + ' left';
+		if (t.total <= 0) {
+			alert("Zeit abgelaufen")
+      clearInterval(timeinterval);		
+		}
+  }
+  clearInterval(timeinterval)
+	update_clock(); // run function once at first to avoid delay
+ timeinterval = setInterval(update_clock, 1000);
+}
+
+function time_remaining(endtime) {
+	console.log("time_remaining")
+	var t = Date.parse(endtime) - Date.parse(new Date());
+	var seconds = Math.floor((t / 1000) % 60);
+	var minutes = Math.floor((t / 1000 / 60) % 60);
+	var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+	var days = Math.floor(t / (1000 * 60 * 60 * 24));
+	return { 'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds };
+}
+
+
+
 //Question Bereich
 const btnShowQuestion2 = document.getElementById("btnShowQuestion2");
 btnShowQuestion2.addEventListener("click", function () {
@@ -245,10 +322,12 @@ btnShowQuestion2.addEventListener("click", function () {
     const question = collectQuestion();
     socket.emit("NewQuestion", question);
     socket.emit("newPhase", "Answering");
+    endTimer();
     clearChart();
     changeLabels(question);
     clearStudentAnswers();
     document.getElementById("myChart").style.visibility = "visible";
+    btnPeerDiscussion.style.backgroundColor ="dodgerblue"
     btnLecteuring.style.backgroundColor = "dodgerblue";
     btnShowQuestion.style.backgroundColor = "dodgerblue";
     btnShowQuestion2.style.backgroundColor = "yellow";
@@ -259,12 +338,21 @@ btnShowQuestion2.addEventListener("click", function () {
   }
 });
 
+function endTimer(){
+  var clock = document.getElementById('div_clock');
+  clearInterval(timeinterval)
+  clock.innerHTML =""
+}
+
+
 const btnLecteuring = document.getElementById("btnLecteuring");
 btnLecteuring.addEventListener("click", function () {
   socket.emit("newPhase", "Lecteuring");
+  endTimer();
   clearChart();
   clearStudentAnswers();
   document.getElementById("myChart").style.visibility = "hidden";
+  btnPeerDiscussion.style.backgroundColor ="dodgerblue"
   btnLecteuring.style.backgroundColor = "yellow";
   btnShowQuestion.style.backgroundColor = "dodgerblue";
   btnShowQuestion2.style.backgroundColor = "dodgerblue";
@@ -274,6 +362,8 @@ btnLecteuring.addEventListener("click", function () {
 //Send Statistics
 const btnShowScore = document.getElementById("btnScore");
 btnScore.addEventListener("click", function () {
+  endTimer();
+  btnPeerDiscussion.style.backgroundColor ="dodgerblue"
   btnLecteuring.style.backgroundColor = "dodgerblue";
   btnShowQuestion.style.backgroundColor = "dodgerblue";
   btnShowQuestion2.style.backgroundColor = "dodgerblue";
